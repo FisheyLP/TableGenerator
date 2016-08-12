@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 // Copyright by FisheyLP, Version 1.3 (12.08.16)
 public class TableGenerator {
 
-    private static String delimiter = " ";
+    private static String delimiter = " | ";
     private static List<Character> char7 = Arrays.asList('°', '~', '@');
     private static List<Character> char5 = Arrays.asList('"', '{', '}', '(', ')', '*', 'f', 'k', '<', '>');
     private static List<Character> char4 = Arrays.asList('I', 't', ' ', '[', ']', '€');
