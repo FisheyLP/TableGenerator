@@ -4,20 +4,20 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// Copyright by FisheyLP
+// Copyright by FisheyLP, Version 1.3 (12.08.16)
 public class TableGenerator {
 
-    private static String delimiter = " | ";
+    private static String delimiter = " ";
     private static List<Character> char7 = Arrays.asList('°', '~', '@');
     private static List<Character> char5 = Arrays.asList('"', '{', '}', '(', ')', '*', 'f', 'k', '<', '>');
     private static List<Character> char4 = Arrays.asList('I', 't', ' ', '[', ']', '€');
     private static List<Character> char3 = Arrays.asList('l', '`', '³', '\'');
     private static List<Character> char2 = Arrays.asList(',', '.', '!', 'i', '´', ':', ';', '|');
-    private static char char1 = '៲';
-    private static Pattern regex = Pattern.compile("៲(?:§r)?(\\s*)"
-			+ "(?:§r§8)?៲(?:§r)?(\\s*)"
-			+ "(?:§r§8)?៲(?:§r)?(\\s*)"
-			+ "(?:§r§8)?៲");
+    private static char char1 = '\u17f2';
+    private static Pattern regex = Pattern.compile(char1+"(?:§r)?(\\s*)"
+			+ "(?:§r§8)?"+char1+"(?:§r)?(\\s*)"
+			+ "(?:§r§8)?"+char1+"(?:§r)?(\\s*)"
+			+ "(?:§r§8)?"+char1);
     private static String colors = "[&§][0-9a-fA-Fk-oK-OrR]";
     private Alignment[] alignments;
     private List<Row> table = new ArrayList<>();
@@ -140,8 +140,11 @@ public class TableGenerator {
            
             String line = sb.toString();
             if (receiver == Receiver.CLIENT) {
-            	Matcher matcher = regex.matcher(line);
-            	line = matcher.replaceAll("$1$2$3 ").replace("§r§8§r", "§r");
+            	for (int i = 0; i < 2; i++) {
+	            	Matcher matcher = regex.matcher(line);
+	            	line = matcher.replaceAll("$1$2$3 ").replace("§r§8§r", "§r")
+	            			.replaceAll("§r(\\s*)§r", "§r$1");
+            	}
             }
             lines.add(line);
         }
